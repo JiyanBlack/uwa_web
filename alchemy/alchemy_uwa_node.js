@@ -4,7 +4,7 @@ const alchemy_language = new AlchemyLanguageV1({ api_key: api_key });
 
 class analysis {
   constructor(queue, callback) {
-    this.queue=queue;
+    this.queue = queue;
     // queue:[{target:"something",isText:true,extract},{target:"url",isText:false,extract}]
     this.callback = callback;
     this.total = queue.length; //total number of results, queue is an object of text or url
@@ -20,17 +20,11 @@ class analysis {
   }
 
   analysis(content) {
-    let parameters;
+    let parameters = { extract: content.extract };
     if (content.isText) {
-      parameters = {
-        extract: content.extract,
-        text: content.target
-      }
+      parameters.text = content.target;
     } else {
-      parameters = {
-        extract: content.extract,
-        url: content.target
-      }
+      parameters.url = content.target;
     }
 
     alchemy_language.combined(parameters, (err, response) => {
@@ -42,7 +36,7 @@ class analysis {
       else {
         this
           .result
-          .push({});
+          .push(response);
         this.current += 1;
         console.log(JSON.stringify(response, null, 2));
         if (this.callback !== undefined) {
@@ -57,15 +51,9 @@ class analysis {
 
 const ana = new analysis([
   {
-    target: "http://www.news.uwa.edu.au/201608248962/awards-and-prizes/research-help-prematur" +
-    "e-babies-recognised-national-awards",
+    target: "http://www.news.uwa.edu.au/201608248962/awards-and-prizes/research-help-premature-babies-recognised-national-awards",
     isText: false,
-    extract: 'keywords'
-  }, {
-    target: "http://www.news.uwa.edu.au/201608248962/awards-and-prizes/research-help-prematur" +
-    "e-babies-recognised-national-awards",
-    isText: false,
-    extract: 'entities'
+    extract: 'authors,concepts,dates,doc-emotion,entities,feeds,keywords,pub-date,relations,typed-rels,doc-sentiment,taxonomy,title'
   }
 ], (err, response) => {
   console.log("Get result number: " + response.length);

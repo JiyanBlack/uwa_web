@@ -15,8 +15,7 @@ export default class mainPage extends React.Component {
       },
       Highchartmodules: [],
       result: {
-        charts:[]
-        
+        charts:[]  
       }
     };
   }
