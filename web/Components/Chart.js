@@ -6,12 +6,27 @@ export default class Chart extends React.Component {
     super();
   }
 
-  render() {
+  componentDidMount() {
+    if (this.props.modules.length != 0) {
+      this.props.modules.forEach(moduleName => {
+        require('highcharts/modules/' + moduleName)(Highcharts);
+      });
+    }
 
+    this.chart = new Highcharts[this.props.type](
+      this.props.container,
+      this.props.options
+    );
+  }
+
+  componentWillUnmount() {
+    this.chart.destroy();
+  }
+
+  render() {
     return (
-      <div className="chart" style={{ width: "100%", height: "400px" }}>
+      <div id={this.props.container} style={{ width: "100%", height: "400px" }}>
       </div>
     )
-
   }
 }
