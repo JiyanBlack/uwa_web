@@ -34,7 +34,6 @@ export default class Result extends React.Component {
 
 
   render() {
-
     return (
       <div className="container section">
         <Chart options={this.data} container={"chart0"} type={"Chart"} modules={[]} />

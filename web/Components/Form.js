@@ -1,4 +1,6 @@
-import React from "react"; export default class Form extends React.Component {
+import React from "react"; 
+
+export default class Form extends React.Component {
   constructor() { super(); }
 
   handleInput(el) {
@@ -20,16 +22,14 @@ import React from "react"; export default class Form extends React.Component {
     return (
       <div className="form z-depth-1">
         <form className="col s12 section container" onSubmit={this.handleInput.bind(this)}>
-          <div className="row" style={{ fontSize: "1.5em", fontWeight: "300" }}>You can give us some urls here:
-		</div>
+          <div className="row" style={{ fontSize: "1.5em", fontWeight: "300" }}>You can give us some urls here:</div>
           <div className="row">
             <div className="input-field col s12">
               <i className="material-icons prefix">account_circle</i>
               <input placeholder='Paste urls here, seperate by semicolon' id="target_urls" type="text" className="validate" />
             </div>
           </div>
-          <div className="row" style={{ fontSize: "1.5em", fontWeight: "300" }}>Or any text you like:
-		</div>
+          <div className="row" style={{ fontSize: "1.5em", fontWeight: "300" }}>Or any text you like:</div>
           <div className="row">
             <div className="input-field col s12">
               <i className="material-icons prefix">mode_edit</i>
@@ -37,8 +37,7 @@ import React from "react"; export default class Form extends React.Component {
               <label htmlFor="target_text">Paste text here</label>
             </div>
           </div>
-          <div className="row" style={{ fontSize: "1.5em", fontWeight: "300" }}>Check the analysis you want:
-		</div>
+          <div className="row" style={{ fontSize: "1.5em", fontWeight: "300" }}>Check the analysis you want:</div>
           <div className="row" id="checkboxes">
             <div className="row">
               <div className="col m3"></div>
@@ -85,7 +84,6 @@ import React from "react"; export default class Form extends React.Component {
                 </p>
               </div>
             </div>
-
             <div className="row">
               <div className="col m3"></div>
               <div className="col s4">
@@ -102,8 +100,6 @@ import React from "react"; export default class Form extends React.Component {
                 </p>
               </div>
             </div>
-
-
             <div className="row">
               <div className="col m3"></div>
               <div className="col s4">
@@ -119,7 +115,6 @@ import React from "react"; export default class Form extends React.Component {
                 </p>
               </div>
             </div>
-
             <div className="row">
               <div className="col m3"></div>
               <div className="col s4">
@@ -135,7 +130,6 @@ import React from "react"; export default class Form extends React.Component {
                 </p>
               </div>
             </div>
-
             <div className="row">
               <div className="col m3"></div>
               <div className="col s4">
@@ -152,7 +146,6 @@ import React from "react"; export default class Form extends React.Component {
                 </p>
               </div>
             </div>
-
             <div className="row">
               <div className="col m3"></div>
               <div className="col s4">
