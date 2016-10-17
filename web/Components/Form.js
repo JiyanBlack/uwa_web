@@ -1,35 +1,159 @@
-import React from "react"; 
+import React from "react";
 
 export default class Form extends React.Component {
-  constructor() { super(); }
+  constructor() {
+    super();
+    this.state = {
+      submitting: false,
+      alreadyGetResult: false
+    }
+  }
 
   handleInput(el) {
-    el.preventDefault(); let inputs = {
-      urls: document.getElementById('target_urls').value.split(';').map(url => url.trim()),
-      text: document.getElementById('target_text').value,
+    el.preventDefault();
+    this.setState({submitting: true});
+    let inputs = {
+      urls: document
+        .getElementById('target_urls')
+        .value
+        .split(';')
+        .map(url => url.trim()),
+      text: document
+        .getElementById('target_text')
+        .value,
       checked: this.getCheckedId()
-    }; this.props.changeInputs(inputs);
+    };
+    this
+      .props
+      .changeInputs(inputs);
   }
 
   getCheckedId() {
     let allInputs = document.querySelectorAll("input");
     allInputs.filter = [].filter;
     allInputs.map = [].map;
-    let checked_box = allInputs.filter(input => input.checked === true).map(input => input.getAttribute('id')); return checked_box;
+    let checked_box = allInputs
+      .filter(input => input.checked === true)
+      .map(input => input.getAttribute('id'));
+    return checked_box;
+  }
+
+  componentDidMount() {
+    $("#submit").click(() => {
+      $("form").slideToggle();
+    });
+  }
+
+  getActionStatus() {
+    if (this.state.submitting == false && this.state.alreadyGetResult == false) {
+      return (
+        <div className="row section" id="submit">
+          <div className="col s12 center-aliclassNamegn">
+            <button
+              className="btn-large waves-effect waves-light"
+              onClick={this
+              .handleInput
+              .bind(this)}
+              type="submit"
+              name="submit">Submit
+              <i className="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      );
+    } else if (this.state.submitting == true) {
+      return (
+        <div className="row section">
+          <div className="preloader-wrapper middle active">
+            <div className="spinner-layer spinner-blue">
+              <div className="circle-clipper left">
+                <div className="circle"></div>
+              </div>
+              <div className="gap-patch">
+                <div className="circle"></div>
+              </div>
+              <div className="circle-clipper right">
+                <div className="circle"></div>
+              </div>
+            </div>
+            <div className="spinner-layer spinner-red">
+              <div className="circle-clipper left">
+                <div className="circle"></div>
+              </div>
+              <div className="gap-patch">
+                <div className="circle"></div>
+              </div>
+              <div className="circle-clipper right">
+                <div className="circle"></div>
+              </div>
+            </div>
+            <div className="spinner-layer spinner-yellow">
+              <div className="circle-clipper left">
+                <div className="circle"></div>
+              </div>
+              <div className="gap-patch">
+                <div className="circle"></div>
+              </div>
+              <div className="circle-clipper right">
+                <div className="circle"></div>
+              </div>
+            </div>
+            <div className="spinner-layer spinner-green">
+              <div className="circle-clipper left">
+                <div className="circle"></div>
+              </div>
+              <div className="gap-patch">
+                <div className="circle"></div>
+              </div>
+              <div className="circle-clipper right">
+                <div className="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (this.state.submitting == false && this.state.alreadyGetResult == true) {
+      return (
+        <div className="row section" id="reset">
+          <div className="col s12 center-align">
+            <button
+              className="btn-large waves-effect waves-light"
+              type="submit"
+              name="reset">Reset
+              <i className="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      );
+    }
   }
 
   render() {
     return (
-      <div className="form z-depth-1">
-        <form className="col s12 section container" onSubmit={this.handleInput.bind(this)}>
-          <div className="row" style={{ fontSize: "1.5em", fontWeight: "300" }}>You can give us some urls here:</div>
+      <div id="form" className="center-align">
+        <form className="col s12 section container">
+          <div
+            className="row"
+            style={{
+            fontSize: "1.5em",
+            fontWeight: "300"
+          }}>You can give us some urls here:</div>
           <div className="row">
             <div className="input-field col s12">
               <i className="material-icons prefix">account_circle</i>
-              <input placeholder='Paste urls here, seperate by semicolon' id="target_urls" type="text" className="validate" />
+              <input
+                placeholder='Paste urls here, seperate by semicolon'
+                id="target_urls"
+                type="text"
+                className="validate"/>
             </div>
           </div>
-          <div className="row" style={{ fontSize: "1.5em", fontWeight: "300" }}>Or any text you like:</div>
+          <div
+            className="row"
+            style={{
+            fontSize: "1.5em",
+            fontWeight: "300"
+          }}>Or any text you like:</div>
           <div className="row">
             <div className="input-field col s12">
               <i className="material-icons prefix">mode_edit</i>
@@ -37,20 +161,25 @@ export default class Form extends React.Component {
               <label htmlFor="target_text">Paste text here</label>
             </div>
           </div>
-          <div className="row" style={{ fontSize: "1.5em", fontWeight: "300" }}>Check the analysis you want:</div>
+          <div
+            className="row"
+            style={{
+            fontSize: "1.5em",
+            fontWeight: "300"
+          }}>Check the analysis you want:</div>
           <div className="row" id="checkboxes">
             <div className="row">
               <div className="col m3"></div>
               <div className="col s4">
                 <p>
-                  <input type="checkbox" id="Authors" />
-                  <label htmlFor="Authors">Authors</label>
+                  <input type="checkbox" id="authors"/>
+                  <label htmlFor="authors">Authors</label>
                 </p>
               </div>
               <div className="col s5">
                 <p>
-                  <input type="checkbox" id="Concepts" />
-                  <label htmlFor="Concepts">Concepts</label>
+                  <input type="checkbox" id="concepts"/>
+                  <label htmlFor="concepts">Concepts</label>
                 </p>
               </div>
             </div>
@@ -58,14 +187,14 @@ export default class Form extends React.Component {
               <div className="col m3"></div>
               <div className="col s4">
                 <p>
-                  <input type="checkbox" id="Dates" />
-                  <label htmlFor="Dates">Filled in</label>
+                  <input type="checkbox" id="dates"/>
+                  <label htmlFor="dates">Dates</label>
                 </p>
               </div>
               <div className="col s5">
                 <p>
-                  <input type="checkbox" id="Emotion-Analysis" />
-                  <label htmlFor="Emotion-Analysis">Emotion Analysis</label>
+                  <input type="checkbox" id="doc-emotion"/>
+                  <label htmlFor="doc-emotion">Emotion Analysis</label>
                 </p>
               </div>
             </div>
@@ -73,14 +202,14 @@ export default class Form extends React.Component {
               <div className="col m3"></div>
               <div className="col s4">
                 <p>
-                  <input type="checkbox" id="Entities" />
-                  <label htmlFor="Entities">Entities</label>
+                  <input type="checkbox" id="entities"/>
+                  <label htmlFor="entities">Entities</label>
                 </p>
               </div>
               <div className="col s5">
                 <p>
-                  <input type="checkbox" id="Feeds" />
-                  <label htmlFor="Feeds">Feeds</label>
+                  <input type="checkbox" id="feeds"/>
+                  <label htmlFor="feeds">Feeds</label>
                 </p>
               </div>
             </div>
@@ -88,15 +217,15 @@ export default class Form extends React.Component {
               <div className="col m3"></div>
               <div className="col s4">
                 <p>
-                  <input type="checkbox" id="Sentiment" />
-                  <label htmlFor="Sentiment">Sentiment</label>
+                  <input type="checkbox" id="doc-sentiment"/>
+                  <label htmlFor="doc-sentiment">Sentiment</label>
                 </p>
               </div>
               <div className="col s5">
                 <p>
-                  <input type="checkbox" id="Text-Extraction " />
-                  <label htmlFor="Text-Extraction ">Text Extraction
-                </label>
+                  <input type="checkbox" id="Text-Extraction"/>
+                  <label htmlFor="Text-Extraction">Text Extraction
+                  </label>
                 </p>
               </div>
             </div>
@@ -104,13 +233,13 @@ export default class Form extends React.Component {
               <div className="col m3"></div>
               <div className="col s4">
                 <p>
-                  <input type="checkbox" id="Keywords" />
-                  <label htmlFor="Keywords">Keywords</label>
+                  <input type="checkbox" id="keywords"/>
+                  <label htmlFor="keywords">Keywords</label>
                 </p>
               </div>
               <div className="col s5">
                 <p>
-                  <input type="checkbox" id="Language" />
+                  <input type="checkbox" id="Language"/>
                   <label htmlFor="Language">Language</label>
                 </p>
               </div>
@@ -119,14 +248,14 @@ export default class Form extends React.Component {
               <div className="col m3"></div>
               <div className="col s4">
                 <p>
-                  <input type="checkbox" id="Microformats" />
+                  <input type="checkbox" id="Microformats"/>
                   <label htmlFor="Microformats">Microformats</label>
                 </p>
               </div>
               <div className="col s5">
                 <p>
-                  <input type="checkbox" id="Publication-Date" />
-                  <label htmlFor="Publication-Date">Publication Date</label>
+                  <input type="checkbox" id="pub-date"/>
+                  <label htmlFor="pub-date">Publication Date</label>
                 </p>
               </div>
             </div>
@@ -134,15 +263,15 @@ export default class Form extends React.Component {
               <div className="col m3"></div>
               <div className="col s4">
                 <p>
-                  <input type="checkbox" id="Relations" />
-                  <label htmlFor="Relations">Relations</label>
+                  <input type="checkbox" id="relations"/>
+                  <label htmlFor="relations">Relations</label>
                 </p>
               </div>
               <div className="col s5">
                 <p>
-                  <input type="checkbox" id="Typed-Relations" />
-                  <label htmlFor="Typed-Relations">Typed Relations
-                </label>
+                  <input type="checkbox" id="typed-rels"/>
+                  <label htmlFor="typed-rels">Typed Relations
+                  </label>
                 </p>
               </div>
             </div>
@@ -150,28 +279,23 @@ export default class Form extends React.Component {
               <div className="col m3"></div>
               <div className="col s4">
                 <p>
-                  <input type="checkbox" id="Taxonomy" />
-                  <label htmlFor="Taxonomy">Taxonomy</label>
+                  <input type="checkbox" id="taxonomy"/>
+                  <label htmlFor="taxonomy">Taxonomy</label>
                 </p>
               </div>
               <div className="col s5">
                 <p>
-                  <input type="checkbox" id="Title-Extraction" />
-                  <label htmlFor="Title-Extraction">Title Extraction</label>
+                  <input type="checkbox" id="title"/>
+                  <label htmlFor="title">Title Extraction</label>
                 </p>
               </div>
             </div>
           </div>
           <div className="divider"></div>
-          <div className="row section">
-            <div className="col s12 center-align">
-              <button className="btn-large waves-effect waves-light" type="submit" name="action">Submit
-                <i className="material-icons right">send</i>
-              </button>
-            </div>
-          </div>
         </form>
+        {this.getActionStatus()}
       </div>
+
     )
   }
 }
