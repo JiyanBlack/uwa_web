@@ -32,5 +32,10 @@
     "watson-developer-cloud": "^2.4.6",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^2.0.0"
   }
 }
