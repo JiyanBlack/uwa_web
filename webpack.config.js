@@ -2,7 +2,7 @@ var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 
 module.exports = {
-  context: __dirname+"/web",
+  context: __dirname + "/app/web",
   devtool: debug
     ? "inline-sourcemap"
     : null,
@@ -19,8 +19,11 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   output: {
-    path: __dirname+"/web/",
+    path: __dirname + "/app/web/",
     filename: "client.bundle.js"
   },
   plugins: debug
@@ -34,6 +37,6 @@ module.exports = {
         .OccurenceOrderPlugin(),
       new webpack
         .optimize
-        .UglifyJsPlugin({mangle: false, sourcemap: false})
+        .UglifyJsPlugin({ mangle: false, sourcemap: false })
     ]
 };

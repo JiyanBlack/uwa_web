@@ -1,0 +1,4 @@
+http://www.news.uwa.edu.au/
+http://www.alchemyapi.com/developers/getting-started-guide/using-alchemyapi-with-python
+Visualisation: http://www.highcharts.com/stock/demo
+
