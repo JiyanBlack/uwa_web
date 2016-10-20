@@ -123,10 +123,10 @@ function analysis(queue, callback) {
 module.exports = analysis;
 
 
-analysis({
-  target: 'HI4PI data will be freely available to scientists around the world through the Strasbourg astronomical data centre',
-  isText: true,
-  extract: ['doc-sentiment', 'keywords']
-}, (err, res) => {
-  console.log(res);
-});
+// analysis({
+//   target: 'HI4PI data will be freely available to scientists around the world through the Strasbourg astronomical data centre',
+//   isText: true,
+//   extract: ['doc-sentiment', 'keywords']
+// }, (err, res) => {
+//   console.log(res);
+// });
