@@ -138,7 +138,7 @@ export default class Result extends React.Component {
         <h5>Taxonomy</h5>
         <div className='container '>
           <div style={this.chartStyle.default}>
-            <Chart options={options} container={'#taxonomy'} style={this.chartStyle.default} type={'Chart'} modules={[]} />
+            <Chart options={options} container={`${this.props.name}taxonomy`} style={this.chartStyle.default} type={'Chart'} modules={[]} />
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@ export default class Result extends React.Component {
       },
       subtitle: {
         text: 'Items such as persons, places, and organizations that are present in the input t' +
-          'ext.'
+        'ext.'
       },
       xAxis: [
         {
@@ -179,7 +179,7 @@ export default class Result extends React.Component {
           text: null
         },
         labels: {
-          formatter: function() {
+          formatter: function () {
             return Math.abs(this.value);
           }
         }
@@ -192,7 +192,7 @@ export default class Result extends React.Component {
       },
 
       tooltip: {
-        formatter: function() {
+        formatter: function () {
           return '<b>' + this.series.name + '</b> is ' + Math.abs(this.point.y);
         }
       },
@@ -212,7 +212,7 @@ export default class Result extends React.Component {
         <h5>Entities</h5>
         <div className='container '>
           <div>
-            <Chart style={this.chartStyle.default} options={options} container={'#entities'} type={'Chart'} modules={[]} />
+            <Chart container={`${this.props.name}entities`} style={this.chartStyle.default} options={options} type={'Chart'} modules={[]} />
           </div>
         </div>
       </div>
@@ -236,7 +236,7 @@ export default class Result extends React.Component {
       },
       subtitle: {
         text: 'Identify concepts with based on other concepts an entities that are present in t' +
-          'hat text.'
+        'hat text.'
       },
       xAxis: {
         type: 'category'
@@ -262,7 +262,7 @@ export default class Result extends React.Component {
       tooltip: {
         headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
         pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of ' +
-          'relevance<br/>'
+        'relevance<br/>'
       },
       series: [
         {
@@ -283,7 +283,7 @@ export default class Result extends React.Component {
         <h5>Concepts</h5>
         <div className='container '>
           <div>
-            <Chart style={this.chartStyle.default} options={options} container={'#concepts'} type={'Chart'} modules={[]} />
+            <Chart container={`${this.props.name}concepts`} style={this.chartStyle.default} options={options} type={'Chart'} modules={[]} />
           </div>
         </div>
       </div>
@@ -299,21 +299,21 @@ export default class Result extends React.Component {
               <a href={feed}>{feed}</a>
             </td>
           </tr>
-          );
+        );
       });
     }
     renderedCharts.push(
       <div
-      id='feeds'
-      className='section hoverable  z-depth-1'
-      key={'chart' + this.counter}>
+        id='feeds'
+        className='section hoverable  z-depth-1'
+        key={'chart' + this.counter}>
         <h5>Feeds</h5>
         <table className='centered container'>
           <tbody>
-          <tr>
-          <td>
-            {myfeeds}
-            </td>
+            <tr>
+              <td>
+                {myfeeds}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -323,9 +323,9 @@ export default class Result extends React.Component {
   renderDocSentiment(renderedCharts, obj) {
     renderedCharts.push(
       <div
-      id='docSentiment'
-      className='section hoverable  z-depth-1'
-      key={'chart' + this.counter}>
+        id='docSentiment'
+        className='section hoverable  z-depth-1'
+        key={'chart' + this.counter}>
         <h5>Sentiment</h5>
         <table className='centered'>
           <thead>
@@ -338,8 +338,8 @@ export default class Result extends React.Component {
           <tbody>
             <tr>
               <td>{obj
-        .type
-        .toUpperCase()}
+                .type
+                .toUpperCase()}
               </td>
               <td>{obj.score}</td>
               <td>{obj.mixed}</td>
@@ -358,9 +358,9 @@ export default class Result extends React.Component {
     }
     renderedCharts.push(
       <div
-      id='authors'
-      className='section hoverable  z-depth-1'
-      key={'chart' + this.counter}>
+        id='authors'
+        className='section hoverable  z-depth-1'
+        key={'chart' + this.counter}>
         <h5>Authors</h5>
         <table className='centered'>
           <thead>
@@ -372,8 +372,8 @@ export default class Result extends React.Component {
           <tbody>
             <tr>
               <td>{obj
-        .confident
-        .toUpperCase()}</td>
+                .confident
+                .toUpperCase()}</td>
               <td>{myauthor}</td>
             </tr>
           </tbody>
@@ -385,9 +385,9 @@ export default class Result extends React.Component {
     let mydate = this.returnStringOrEmpty(obj.date);
     renderedCharts.push(
       <div
-      className='section hoverable  z-depth-1'
-      key={'chart' + this.counter}
-      id='publicationDate'>
+        className='section hoverable  z-depth-1'
+        key={'chart' + this.counter}
+        id='publicationDate'>
         <h5>Publication Date</h5>
         <table className='centered'>
           <thead>
@@ -399,8 +399,8 @@ export default class Result extends React.Component {
           <tbody>
             <tr>
               <td>{obj
-        .confident
-        .toUpperCase()}</td>
+                .confident
+                .toUpperCase()}</td>
               <td>{mydate.slice(0, 4) + '-' + mydate.slice(4, 6) + '-' + mydate.slice(6, 8)}</td>
             </tr>
           </tbody>
@@ -411,9 +411,9 @@ export default class Result extends React.Component {
   renderTitle(renderedCharts, obj) {
     renderedCharts.push(
       <div
-      className='section hoverable  z-depth-1'
-      key={'chart' + this.counter}
-      id='title'>
+        className='section hoverable  z-depth-1'
+        key={'chart' + this.counter}
+        id='title'>
         <h5>Title</h5>
         <div className='container center-align'>
           {obj.toUpperCase()}
@@ -424,20 +424,20 @@ export default class Result extends React.Component {
   renderTextExtraction(renderedCharts, obj) {
     renderedCharts.push(
       <div
-      className='section hoverable  z-depth-1'
-      key={'chart' + this.counter}
-      id='textExtraction'>
+        className='section hoverable  z-depth-1'
+        key={'chart' + this.counter}
+        id='textExtraction'>
         <h5>Text Extraction</h5>
         <div className='container'>
           {(() => {
-        return obj
-          .text
-          .split('\n')
-          .map((txt, i) => {
-            return <div key={i}>
+            return obj
+              .text
+              .split('\n')
+              .map((txt, i) => {
+                return <div key={i}>
                   {txt}</div>;
-          });
-      })()}
+              });
+          })()}
         </div>
       </div>
     );
@@ -445,9 +445,9 @@ export default class Result extends React.Component {
   renderMicroformats(renderedCharts, obj) {
     renderedCharts.push(
       <div
-      className='hoverable section  z-depth-1'
-      key={'chart' + this.counter}
-      id='microformats'>
+        className='hoverable section  z-depth-1'
+        key={'chart' + this.counter}
+        id='microformats'>
         <h5>Microformats</h5>
         <table className='centered'>
           <tbody>
@@ -462,9 +462,9 @@ export default class Result extends React.Component {
   renderLanguageAnalysis(renderedCharts, obj) {
     renderedCharts.push(
       <div
-      className='section hoverable responsive-table z-depth-1'
-      key={'chart' + this.counter}
-      id='languageAnalysis'>
+        className='section hoverable responsive-table z-depth-1'
+        key={'chart' + this.counter}
+        id='languageAnalysis'>
         <h5>Language Analysis</h5>
         <table className='centered'>
           <thead>
@@ -478,8 +478,8 @@ export default class Result extends React.Component {
           <tbody>
             <tr>
               <td>{obj
-        .language
-        .toUpperCase()}</td>
+                .language
+                .toUpperCase()}</td>
               <td>{obj['iso-639-1'] + '/' + obj['iso-639-2'] + '/' + obj['iso-639-3']}</td>
               <td>{obj['native-speakers']}</td>
               <td>
@@ -497,13 +497,13 @@ export default class Result extends React.Component {
         <ul className='collapsible' data-collapsible='accordion'>
           <li>
             <div className='collapsible-header active'>
-              <i className='material-icons'>filter_drama</i>{this.props.name}</div>
+              <i className='material-icons'>filter_drama</i><span className='truncate'>{'RESULT ' + this.props.name + ' -- ' + this.props.result.originSource}</span></div>
             <div className='collapsible-body'>
               {this.renderResult()}
             </div>
           </li>
         </ul>
       </div>
-      );
+    );
   }
 }

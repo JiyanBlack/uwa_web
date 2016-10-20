@@ -8,7 +8,7 @@ export default class Error extends React.Component {
       return (
         <div className='valign-wrapper' id='error' style={{
           border: '1px solid red',
-          'border-radius': '5px'
+          borderRadius: '5px'
         }}>
         <div className='container' style={{
           fontSize: '1.3em'

@@ -8,12 +8,12 @@ export default class Header extends React.Component {
           <a href="#!" className="brand-logo left"><i className="material-icons">cloud</i>Alchemy UWA</a>
           <ul className="right">
             <li>
-              <a href="sass.html">
-                <i className="material-icons left">search</i>Anaylze URL</a>
+              <a href="/" rel="noopener noreferrer" target='_blank'>
+                <i className="material-icons left">library_add</i>Add Analysis</a>
             </li>
             <li>
-              <a href="badges.html">
-                <i className="material-icons left">view_module</i>Text</a>
+              <a rel="noopener noreferrer" href="http://www.ibm.com/watson/developercloud/doc/alchemylanguage/" target='_blank'>
+                <i className="material-icons left">view_module</i>Docs</a>
             </li>
           </ul>
         </div>

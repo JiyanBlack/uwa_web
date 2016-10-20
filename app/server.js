@@ -1,26 +1,51 @@
 'use strict';
 
-const Analysis = require('./Analysis');
+const analysis = require('./analysis');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const sample_data = JSON.parse(require('fs').readFileSync('./app/sample_analysis.json'));
-app.use(express.static('./app/web'));
-app.use(bodyParser.json());
 
-app.post('*', (req, res) => {
-  try {
-    console.log(req.body);
-    // new Analysis(req.body, (err, response) => {     if (err)
-    // res.send(err.toString(), 500);     else res.send(JSON.stringify(response),
-    // 200);     } );
-    res.status(200).send(JSON.stringify(sample_data));
-  } catch (e) {
-    console.log(e);
-    res.send(e.toString(), 500);
+app.use('/uwa', express.static('./app/web'));
+app.use(bodyParser.json());
+app.enable('trust proxy');
+
+
+app.post('/uwa', (req, res) => {
+  let myreq = [];
+  let totalAnalysis = 0;
+  let myresult = [];
+  for (let i in req.body.urls) {
+    totalAnalysis += 1;
+    myreq.push({
+      target: req.body.urls[i],
+      isText: false,
+      extract: req.body.checked
+    });
+  }
+
+  if (req.body.text.length != 0) {
+    totalAnalysis += 1;
+    myreq.push({
+      target: req.body.text,
+      isText: true,
+      extract: req.body.checked
+    });
+  }
+  // console.log(myreq);
+  for (let i in myreq) {
+    analysis(myreq[i], (err, result) => {
+      myresult.push(result);
+      // console.log(myresult);
+      if (err != null) {
+        return res.status(400).send(err.toString());
+      } else {
+        if (myresult.length == totalAnalysis) {
+          return res.status(200).send(JSON.stringify(myresult));
+        }
+      }
+    });
   }
 });
 
-app.listen(8000, () => {
-  console.log('Listening at 8000...');
-});
+
+app.listen(8001);

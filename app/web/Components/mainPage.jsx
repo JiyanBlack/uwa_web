@@ -17,7 +17,7 @@ export default class mainPage extends React.Component {
         checked: []
       },
       Highchartmodules: [],
-      result: null, // require('../sampleresult.js'),
+      result: null,
       buttonState: {
         submitting: false,
         alreadyGetResult: false
@@ -26,6 +26,7 @@ export default class mainPage extends React.Component {
     };
   }
 
+
   changeInputs(inputs) {
     this.state.inputs = inputs;
     console.log(inputs);
@@ -33,13 +34,13 @@ export default class mainPage extends React.Component {
       error: undefined
     });
     $.ajax({
-      url: '/',
+      url: '/uwa',
       method: 'POST',
       contentType: 'application/json',
       data: JSON.stringify(inputs)
     })
-      .fail((jq, status, error) => console.log('Ajax Error: ' + error.toString()))
-      .done((data, status, jq) => {
+      .fail((jq, status, error) => displayError('Server(Ajax) Error: ' + error.toString()))
+      .done((data) => {
         this.setState({
           result: JSON.parse(data)
         });
@@ -58,7 +59,7 @@ export default class mainPage extends React.Component {
   renderResult() {
     let results = [];
     for (let i in this.state.result) {
-      results.push(<Result key={'Result' + i} name={'RESULT ' + Number(i + 1)} setButtonState={this.setButtonState.bind(this)} result={this.state.result[i]} modules={this.state.Highchartmodules}/>
+      results.push(<Result key={'Result' + i} name={Number(Number(i) + 1)} setButtonState={this.setButtonState.bind(this)} result={this.state.result[i]} modules={this.state.Highchartmodules} />
       );
     }
     return results;
@@ -74,14 +75,14 @@ export default class mainPage extends React.Component {
   render() {
     return (
       <div>
-        <Header/>
-        <Description/>
-        <Error message={this.state.error}/>
-        <Form displayError={this.displayError.bind(this)}  changeInputs={this
-        .changeInputs
-        .bind(this)} setButtonState={this.setButtonState.bind(this)} buttonState={this.state.buttonState} />
+        <Header />
+        <Description />
+        <Error message={this.state.error} />
+        <Form displayError={this.displayError.bind(this)} changeInputs={this
+          .changeInputs
+          .bind(this)} setButtonState={this.setButtonState.bind(this)} buttonState={this.state.buttonState} />
         {this.renderResult()}
       </div>
-      );
+    );
   }
 }
