@@ -26,7 +26,6 @@ export default class mainPage extends React.Component {
     };
   }
 
-
   changeInputs(inputs) {
     this.state.inputs = inputs;
     console.log(inputs);
@@ -39,7 +38,7 @@ export default class mainPage extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify(inputs)
     })
-      .fail((jq, status, error) => displayError('Server(Ajax) Error: ' + error.toString()))
+      .fail((jq, status, error) => this.displayError('Server(Ajax) Error: ' + error.toString()))
       .done((data) => {
         this.setState({
           result: JSON.parse(data)

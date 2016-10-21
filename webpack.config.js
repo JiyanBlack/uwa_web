@@ -30,8 +30,8 @@ module.exports = {
     ? []
     : [
       new webpack.DefinePlugin({
-        'process.env': {
-          'NODE_ENV': JSON.stringify('production')
+        "process.env": {
+          NODE_ENV: JSON.stringify("production")
         }
       }),
       new webpack
@@ -39,9 +39,16 @@ module.exports = {
         .DedupePlugin(),
       new webpack
         .optimize
-        .OccurenceOrderPlugin(),
+        .UglifyJsPlugin({
+          mangle: false, sourcemap: false, output: {
+            comments: false,
+          },
+          compress: {
+            warnings: false
+          }
+        }),
       new webpack
         .optimize
-        .UglifyJsPlugin({ mangle: false, sourcemap: false })
+        .AggressiveMergingPlugin()
     ]
 };

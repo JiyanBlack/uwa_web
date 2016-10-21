@@ -41,7 +41,6 @@ export default class Form extends React.Component {
       this
         .props
         .setButtonState(true, false);
-
       this
         .props
         .changeInputs(inputs);
@@ -55,14 +54,12 @@ export default class Form extends React.Component {
   checkAll() {
     let allInputs = document.querySelectorAll('#checkboxes input');
     allInputs.map = Array.prototype.forEach;
-    let checked_box = allInputs
-      .forEach(input => input.checked = true);
+    let checked_box = allInputs.forEach(input => input.checked = true);
   }
   clearAll() {
     let allInputs = document.querySelectorAll('#checkboxes input');
     allInputs.map = Array.prototype.forEach;
-    let checked_box = allInputs
-      .forEach(input => input.checked = false);
+    let checked_box = allInputs.forEach(input => input.checked = false);
   }
 
   getCheckedId() {
@@ -86,28 +83,27 @@ export default class Form extends React.Component {
               .checkAll
               .bind(this)}
             id='checkall'>Check All
-              <i className='material-icons right'>send</i>
+            <i className='material-icons right'>send</i>
           </button>
-          <span>  </span>
+          <span>&#32;&#32;</span>
           <button
             className='btn waves-effect waves-light  red lighten-2'
             onClick={this
               .clearAll
               .bind(this)}
             id='clear'>Clear
-              <i className='material-icons right'>send</i>
+            <i className='material-icons right'>send</i>
           </button>
-          <span>  </span>
+          <span>&#32;&#32;</span>
           <button
             className='btn waves-effect waves-light'
             onClick={this
               .handleInput
               .bind(this)}
             id='submit'>Submit
-              <i className='material-icons right'>send</i>
+            <i className='material-icons right'>send</i>
           </button>
         </div>
-
 
       );
     } else if (this.props.buttonState.submitting == true) {
@@ -186,9 +182,9 @@ export default class Form extends React.Component {
             }}>You can give us some urls here:</div>
           <div className='row'>
             <div className='input-field col s12'>
-              <i className='material-icons prefix'>account_circle</i>
+              <i className='material-icons prefix'>input</i>
               <input
-                placeholder='Paste url here'
+                placeholder='Paste urls here, seperate by semicolon'
                 id='target_urls'
                 type='text'
                 className='validate' />

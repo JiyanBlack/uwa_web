@@ -4,6 +4,7 @@ const analysis = require('./analysis');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+// const fs = require('fs');
 
 app.use('/uwa', express.static('./app/web'));
 app.use(bodyParser.json());
@@ -35,11 +36,11 @@ app.post('/uwa', (req, res) => {
   for (let i in myreq) {
     analysis(myreq[i], (err, result) => {
       myresult.push(result);
-      // console.log(myresult);
       if (err != null) {
         return res.status(400).send(err.toString());
       } else {
         if (myresult.length == totalAnalysis) {
+          // fs.writeFileSync('tmp.json', JSON.stringify(myresult, null, 2));
           return res.status(200).send(JSON.stringify(myresult));
         }
       }

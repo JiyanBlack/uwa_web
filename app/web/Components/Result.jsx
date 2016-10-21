@@ -296,7 +296,7 @@ export default class Result extends React.Component {
         return (
           <tr key={'feed' + i}>
             <td>
-              <a href={feed}>{feed}</a>
+              <a href={feed}>{feed.feed}</a>
             </td>
           </tr>
         );
@@ -310,11 +310,7 @@ export default class Result extends React.Component {
         <h5>Feeds</h5>
         <table className='centered container'>
           <tbody>
-            <tr>
-              <td>
-                {myfeeds}
-              </td>
-            </tr>
+            {myfeeds}
           </tbody>
         </table>
       </div>
@@ -356,6 +352,12 @@ export default class Result extends React.Component {
         .names
         .join(', ');
     }
+    let confident;
+    try {
+      confident = obj
+        .confident
+        .toUpperCase()
+    } catch (e) { confident = 'Yes' }
     renderedCharts.push(
       <div
         id='authors'
@@ -371,9 +373,7 @@ export default class Result extends React.Component {
           </thead>
           <tbody>
             <tr>
-              <td>{obj
-                .confident
-                .toUpperCase()}</td>
+              <td>{confident}</td>
               <td>{myauthor}</td>
             </tr>
           </tbody>
