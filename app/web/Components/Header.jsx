@@ -8,7 +8,7 @@ export default class Header extends React.Component {
           <a href="#!" className="brand-logo left"><i className="material-icons">cloud</i>Alchemy UWA</a>
           <ul className="right">
             <li>
-              <a href="/" rel="noopener noreferrer" target='_blank'>
+              <a href="/uwa/" rel="noopener noreferrer" target='_blank'>
                 <i className="material-icons left">library_add</i>Add Analysis</a>
             </li>
             <li>
